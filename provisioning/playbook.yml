@@ -11,9 +11,9 @@
         # This contains the perf tools installed below, but still
         # use the below git repo for the most up-to-date versions
         - atop
-        - perf-tools-unstable
         - git
         - htop
+        - perf-tools-unstable
         - sysdig
     - name: Clone Brendan Greggs perf tools
       git:
