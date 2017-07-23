@@ -1,0 +1,23 @@
+---
+- hosts: all
+  tasks:
+    - name: Run the equivalent of "apt-get update" as a separate step
+      apt:
+        update_cache: yes
+    - name: Install base packages
+      apt: name={{item}} state=installed
+      with_items:
+        - linux-tools-generic
+        # This contains the perf tools installed below, but still
+        # use the below git repo for the most up-to-date versions
+        - atop
+        - perf-tools-unstable
+        - git
+        - htop
+        - sysdig
+    - name: Clone Brendan Greggs perf tools
+      git:
+        # same tools as perf-tools-unstable offers, but most
+        # updated versions.  Use the relatively: ./tool_name
+        repo: https://github.com/brendangregg/perf-tools.git
+        dest: /home/vagrant/git
